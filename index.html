@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="./umd/index.js"></script>
+</head>
+
+<body>
+    <p>
+        mathml: 行内公式 <n-katex output="mathml">\underbrace{a+b+\dots+n}_{m2}</n-katex>
+        <br />
+        htmlAndMathml: 行内公式 <n-katex>\underbrace{a+b+\dots+n}_{m2}</n-katex>
+        <br />
+        html: 行内公式<n-katex output="html">\underbrace{a+b+\dots+n}_{m2}</n-katex>
+    </p>
+    <n-katex block="true">
+        \begin{array}{c}
+        S= \binom{N}{n},A_{k}=\binom{M}{k}\cdot \binom{N-M}{n-k} \\
+        P\left ( A_{k}\right ) = \frac{\binom{M}{k}\cdot \binom{N-M}{n-k}}{\binom{N}{n}}
+        \end{array}
+    </n-katex>
+</body>
+
+</html>

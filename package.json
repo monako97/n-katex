@@ -1,0 +1,31 @@
+{
+  "name": "n-katex",
+  "version": "1.0.6",
+  "description": "katex for web component",
+  "author": "moneko",
+  "module": "./umd/index.js",
+  "main": "./umd/index.js",
+  "types": "./index.d.ts",
+  "keywords": [
+    "n-katex",
+    "katex",
+    "KaTex",
+    "webcomponent"
+  ],
+  "scripts": {
+    "start": "mo start single-component solid-js",
+    "build": "mo build single-component solid-js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@moneko/cli": "2.0.0-beta.5",
+    "@moneko/core": "3.0.0-beta.43",
+    "@types/katex": "0.16.0",
+    "katex": "0.16.8"
+  },
+  "files": [
+    "umd",
+    "index.d.ts",
+    "README.md"
+  ]
+}
