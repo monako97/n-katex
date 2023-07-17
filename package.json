@@ -1,6 +1,6 @@
 {
   "name": "n-katex",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "katex for web component",
   "author": "moneko",
   "module": "./umd/index.js",
