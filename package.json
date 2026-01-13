@@ -1,6 +1,6 @@
 {
   "name": "n-katex",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "katex for web component",
   "author": "moneko",
   "module": "./umd/index.js",
@@ -12,16 +12,32 @@
     "KaTex",
     "webcomponent"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monako97/n-katex"
+  },
   "scripts": {
-    "start": "mo start single-component solid-js",
-    "build": "mo build single-component solid-js"
+    "changelog": "mo changelog CHANGELOG.md && git add CHANGELOG.md",
+    "start": "mo start library solid",
+    "build": "mo build library solid",
+    "lint": "mo eslint [components,site] --fix",
+    "postlint": "mo stylelint [components,site] --fix",
+    "precommit": "npm run lint && npm run changelog",
+    "lint:commit": "pure-lint mode=commit && npm run changelog",
+    "prepare": "mo githooks pre-commit=\"npm run lint:commit\" commit-msg=\"commit-lint\"",
+    "preview": "mo server port=8080 root_dir=./docs"
   },
   "license": "MIT",
   "devDependencies": {
-    "@moneko/cli": "2.0.0-beta.5",
-    "@moneko/core": "3.0.0-beta.43",
-    "@types/katex": "0.16.0",
-    "katex": "0.16.8"
+    "@moneko/core": "4.4.3",
+    "@moneko/solid": "2.0.3",
+    "@types/katex": "0.16.8",
+    "component-register": "0.8.7",
+    "katex": "0.16.27",
+    "neko-ui": "2.14.7",
+    "n-code-live": "2.1.1",
+    "solid-element": "1.9.1",
+    "solid-js": "1.9.10"
   },
   "files": [
     "umd",

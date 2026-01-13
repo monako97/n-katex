@@ -1,5 +1,33 @@
-import katex from 'katex';
-import type { KaTexProps } from '../index';
+import { render } from 'katex';
+
+export interface TrustContext {
+  command: string
+  url: string
+  protocol: string
+}
+
+export interface KaTexProps {
+  class?: string;
+  children?: string;
+  output?: "html" | "htmlAndMathml" | "mathml";
+  trust?: boolean | ((context: TrustContext) => boolean);
+  colorIsTextColor?: boolean;
+  strict?: boolean;
+  globalGroup?: boolean;
+  fleqn?: boolean;
+  leqno?: boolean;
+  displayMode?: boolean;
+  throwOnError?: boolean;
+  maxSize?: number;
+  maxExpand?: number;
+  minRuleThickness?: number;
+  errorColor?: string;
+  macros?: object;
+}
+
+export interface KaTexElement extends Omit<HTMLDivElement, 'children'>, KaTexProps {
+  ref?: KaTexElement | { current: KaTexElement | null };
+}
 
 // 中划线转驼峰换
 function camelize(str: string) {
@@ -48,7 +76,7 @@ class KaTex extends HTMLElement {
         },
         set [k](next: string) {
           if (typeof next === 'function' || typeof next === 'object') {
-            that[k] = next;
+            that[k as keyof typeof KaTex] = next;
           } else {
             that.setAttribute(attr, next);
           }
@@ -65,7 +93,7 @@ class KaTex extends HTMLElement {
     this.timer = setTimeout(() => {
       clearTimeout(this.timer);
       if (this.shadowRoot && this.textContent) {
-        katex.render(this.textContent, this.shadowRoot.lastElementChild as HTMLElement, {
+        render(this.textContent, this.shadowRoot.lastElementChild as HTMLElement, {
           throwOnError: this.throwOnError,
           errorColor: this.errorColor,
           displayMode: this.displayMode,
@@ -87,7 +115,8 @@ class KaTex extends HTMLElement {
   }
   attributeChangedCallback(name: keyof Omit<KaTexProps, 'children' | 'class'>, old: string, next: string) {
     if (old !== next && KaTex.observedAttributes.includes(name)) {
-      this[camelize(name)] = next;
+      const key = camelize(name) as keyof typeof KaTex;
+      this[key] = next as unknown as typeof KaTex[typeof key];
       this.highlight();
     }
   }

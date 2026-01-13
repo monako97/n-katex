@@ -1,4 +1,4 @@
-interface TrustContext {
+export interface TrustContext {
   command: string
   url: string
   protocol: string
